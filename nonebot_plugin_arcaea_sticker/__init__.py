@@ -17,7 +17,7 @@ from .resource import ResourceManager
 from .render import generate_sticker_image, renderer, resource_manager
 from .help import generate_help_image, HELP_TEXT
 
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 
 # 获取驱动器
 driver = get_driver()
@@ -32,7 +32,7 @@ __plugin_meta__ = PluginMetadata(
     supported_adapters={"~onebot.v11"},
     extra={
         "author": "JQ-28",
-        "version": "0.2.2",
+        "version": "0.2.3",
         "priority": 1,
     },
 )
@@ -266,7 +266,7 @@ async def handle_args(matcher: Matcher, event: MessageEvent, args: Namespace = S
                 auto_adjust=True,  # 默认启用自动调整
                 **params
             )
-            logger.debug(f"生成表情图片参数: {params}")
+            logger.debug(f"生成表情图��参数: {params}")
         except Exception as e:
             logger.exception("生成表情图片失败")
             await matcher.finish(f"生成表情图片失败: {str(e)}")

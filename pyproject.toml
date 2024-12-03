@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-arcaea-sticker"
-version = "0.2.2"
+version = "0.2.3"
 description = "Arcaea sticker generator plugin for NoneBot2"
 authors = [
     { name = "JQ-28", email = "480352716@qq.com" }
@@ -20,30 +20,19 @@ license = { text = "MIT" }
 Homepage = "https://github.com/JQ-28/nonebot-plugin-arcaea-sticker"
 Repository = "https://github.com/JQ-28/nonebot-plugin-arcaea-sticker"
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.hatch.version]
-path = "nonebot_plugin_arcaea_sticker/__init__.py"
-pattern = "__version__ = \"(?P<version>[^\"]+)\""
-
-[tool.hatch.metadata]
-allow-direct-references = true
-
-[tool.hatch.build.targets.wheel]
-packages = ["nonebot_plugin_arcaea_sticker"]
-
-[tool.hatch.build.targets.sdist]
-include = [
-    "/nonebot_plugin_arcaea_sticker",
-    "/README.md",
-    "/LICENSE",
-]
-
 [tool.nonebot]
 adapters = [
     { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" }
 ]
 plugins = ["nonebot_plugin_arcaea_sticker"]
-plugin_dirs = [] 
+plugin_dirs = []
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+[tool.pdm.build]
+includes = ["nonebot_plugin_arcaea_sticker"]
+source-includes = ["LICENSE", "README.md"]
+  
