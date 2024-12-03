@@ -1,0 +1,69 @@
+{#-
+Args:
+- id: image pattern id
+- image: image url
+- x: first line baseline center x pos in pixel
+- y: meaning like x
+- font_color: font color, use web color
+- font_size: font size in pixel
+- stroke_color: stroke color, use web color
+- stroke_width: stroke width in pixel
+- rotate: rotate in degrees
+- line_spacing: line spacing, 1.0 means no spacing
+- font: font url
+- width: image width in pixel
+- height: image height in pixel
+-#}
+<svg width="{{ width }}" height="{{ height }}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'CustomFont';
+        src: url('{{ font }}');
+      }
+    </style>
+  </defs>
+  <image x="0" y="0" width="{{ width }}" height="{{ height }}" href="{{ image }}"/>
+  <!-- 外层白色描边 -->
+  <text x="{{ x }}" y="{{ y }}" 
+        font-family="CustomFont" 
+        font-size="{{ font_size }}"
+        fill="none"
+        stroke="white"
+        stroke-width="15"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        text-anchor="middle"
+        transform="rotate({{ rotate }}, {{ x }}, {{ y }})">
+    {%- for line in text.split('\n') -%}
+    <tspan x="{{ x }}" dy="{{ 0 if loop.first else font_size * 1.2 }}">{{ line }}</tspan>
+    {%- endfor -%}
+  </text>
+  <!-- 内层描边 -->
+  <text x="{{ x }}" y="{{ y }}" 
+        font-family="CustomFont" 
+        font-size="{{ font_size }}"
+        fill="none"
+        stroke="{{ stroke_color }}"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        text-anchor="middle"
+        transform="rotate({{ rotate }}, {{ x }}, {{ y }})">
+    {%- for line in text.split('\n') -%}
+    <tspan x="{{ x }}" dy="{{ 0 if loop.first else font_size * 1.2 }}">{{ line }}</tspan>
+    {%- endfor -%}
+  </text>
+  <!-- 文字本体 -->
+  <text x="{{ x }}" y="{{ y }}" 
+        font-family="CustomFont" 
+        font-size="{{ font_size }}"
+        fill="{{ font_color }}"
+        text-anchor="middle"
+        transform="rotate({{ rotate }}, {{ x }}, {{ y }})"
+        style="text-rendering: optimizeLegibility;">
+    {%- for line in text.split('\n') -%}
+    <tspan x="{{ x }}" dy="{{ 0 if loop.first else font_size * 1.2 }}">{{ line }}</tspan>
+    {%- endfor -%}
+  </text>
+</svg>

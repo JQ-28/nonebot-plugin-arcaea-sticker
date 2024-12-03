@@ -1,0 +1,59 @@
+{#- Help page template -#}
+<svg width="800" height="900" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @font-face {
+                font-family: 'CustomFont';
+                src: url('{{ font }}');
+            }
+            .title { font: bold 36px CustomFont; fill: #7743a3; }
+            .subtitle { font: bold 28px CustomFont; fill: #4c8cdd; }
+            .content { font: 24px CustomFont; fill: #333333; }
+            .example { font: 22px CustomFont; fill: #329f8c; }
+            .footer { font: 20px CustomFont; fill: #974149; }
+            .section { fill: #f8f9fa; stroke: #e9ecef; stroke-width: 1; rx: 15; }
+        </style>
+    </defs>
+    <rect width="100%" height="100%" fill="#ffffff"/>
+    
+    <!-- 背景区块 -->
+    <rect class="section" x="30" y="20" width="740" height="860"/>
+    
+    <!-- 标题 -->
+    <text x="400" y="60" class="title" text-anchor="middle">✨ Arcaea 表情包生成器 ✨</text>
+    
+    <!-- 基础指令 -->
+    <text x="50" y="110" class="subtitle">🎮 基础指令：</text>
+    <text x="70" y="150" class="content">arc &lt;角色&gt; &lt;文字&gt; 生成表情包</text>
+    <text x="70" y="180" class="content">arc -h 显示帮助</text>
+    <text x="70" y="210" class="content">arc 进入交互模式</text>
+    
+    <!-- 自定义参数 -->
+    <text x="50" y="260" class="subtitle">🎨 自定义参数（都是可选的）：</text>
+    <text x="70" y="300" class="content">-s, --size &lt;大小&gt;     文字大小 (10~100，默认45)</text>
+    <text x="70" y="330" class="content">                      数字越大文字越大</text>
+    
+    <text x="70" y="370" class="content">-x &lt;位置&gt;            横向位置 (0~296，默认148)</text>
+    <text x="70" y="400" class="content">                      数字越大文字越靠右</text>
+    <text x="70" y="430" class="content">                      0在最左边，296在最右边</text>
+    
+    <text x="70" y="470" class="content">-y &lt;位置&gt;            纵向位置 (0~256，默认128)</text>
+    <text x="70" y="500" class="content">                      数字越大文字越靠下</text>
+    <text x="70" y="530" class="content">                      0在最上面，256在最下面</text>
+    
+    <text x="70" y="570" class="content">-r, --rotate &lt;角度&gt;   旋转角度 (-180~180，默认-12)</text>
+    <text x="70" y="600" class="content">                      正数顺时针旋转，负数逆时针旋转</text>
+    
+    <text x="70" y="640" class="content">-c, --color &lt;颜色&gt;    文字颜色 (十六进制，默认角色专属颜色)</text>
+    <text x="70" y="670" class="content">                      如：#FF0000 红色  #00FF00 绿色</text>
+    <text x="70" y="700" class="content">                      #0000FF 蓝色  #FF00FF 粉色</text>
+    
+    <!-- 使用示例 -->
+    <text x="50" y="740" class="subtitle">💡 使用示例：</text>
+    <text x="70" y="770" class="example">arc luna 好耶！                         # 基础用法</text>
+    <text x="70" y="800" class="example">arc hikari "第一行\n第二行" -s 45         # 多行文字</text>
+    <text x="70" y="830" class="example">arc tairitsu 开心 -x 150 -y 100 -r -20  # 调整位置和角度</text>
+    
+    <!-- 页脚 -->
+    <text x="400" y="870" class="footer" text-anchor="middle">Made by JQ-28</text>
+</svg> 
