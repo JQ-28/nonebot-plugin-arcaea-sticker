@@ -17,6 +17,8 @@ from .resource import ResourceManager
 from .render import generate_sticker_image, renderer, resource_manager
 from .help import generate_help_image, HELP_TEXT
 
+__version__ = "0.2.2"
+
 # 获取驱动器
 driver = get_driver()
 
@@ -30,7 +32,7 @@ __plugin_meta__ = PluginMetadata(
     supported_adapters={"~onebot.v11"},
     extra={
         "author": "JQ-28",
-        "version": "0.2.1",
+        "version": "0.2.2",
         "priority": 1,
     },
 )
