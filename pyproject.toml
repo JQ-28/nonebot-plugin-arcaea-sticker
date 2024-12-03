@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-arcaea-sticker"
-version = "0.2.4"
+dynamic = []
 description = "Arcaea sticker generator plugin for NoneBot2"
 authors = [
     { name = "JQ-28", email = "480352716@qq.com" }
@@ -13,12 +13,29 @@ dependencies = [
     "jinja2>=3.0.0",
 ]
 requires-python = ">=3.8"
+keywords = [
+    "arcaea",
+    "nonebot2",
+    "plugin",
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+]
 readme = "README.md"
-license = { text = "MIT" }
+version = "0.2.5"
+
+[project.license]
+text = "MIT"
 
 [project.urls]
-Homepage = "https://github.com/JQ-28/nonebot-plugin-arcaea-sticker"
-Repository = "https://github.com/JQ-28/nonebot-plugin-arcaea-sticker"
+homepage = "https://github.com/JQ-28/nonebot-plugin-arcaea-sticker"
+
 
 [tool.nonebot]
 adapters = [
