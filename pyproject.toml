@@ -1,9 +1,9 @@
 [project]
 name = "nonebot-plugin-arcaea-sticker"
 dynamic = []
-description = "Arcaea sticker generator plugin for NoneBot2"
+description = "Default template for PDM package"
 authors = [
-    { name = "JQ-28", email = "480352716@qq.com" }
+    { name = "JQ-28", email = "480352716@qq.com" },
 ]
 dependencies = [
     "nonebot2>=2.0.0",
@@ -12,7 +12,7 @@ dependencies = [
     "Pillow>=9.0.0",
     "jinja2>=3.0.0",
 ]
-requires-python = ">=3.8"
+requires-python = "==3.11.*"
 keywords = [
     "arcaea",
     "nonebot2",
@@ -44,6 +44,8 @@ adapters = [
 plugins = ["nonebot_plugin_arcaea_sticker"]
 plugin_dirs = []
 
+[tool.pdm]
+distribution = true
 [tool.pdm.build]
 includes = []
 
@@ -51,7 +53,3 @@ includes = []
 source = "file"
 path = "nonebot_plugin_arcaea_sticker/__init__.py"
 
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-  
