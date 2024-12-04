@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-arcaea-sticker"
-version = "0.2.6"
+version = "0.2.7"
 description = "Arcaea sticker generator plugin for NoneBot2"
 authors = [
     { name = "JQ-28", email = "480352716@qq.com" }
@@ -21,7 +21,6 @@ readme = "README.md"
 license = { text = "MIT" }
 
 keywords = ["nonebot2", "plugin", "arcaea", "sticker"]
-packages = [{include = "nonebot_plugin_arcaea_sticker"}]
 
 [project.urls]
 homepage = "https://github.com/JQ-28/nonebot-plugin-arcaea-sticker"
@@ -36,8 +35,11 @@ plugins = ["nonebot_plugin_arcaea_sticker"]
 
 [tool.pdm]
 [tool.pdm.build]
-includes = ["nonebot_plugin_arcaea_sticker"]
-source-includes = ["LICENSE", "README.md"]
+includes = []
+
+[tool.pdm.version]
+source = "file"
+path = "nonebot_plugin_arcaea_sticker/__init__.py"
 
 [build-system]
 requires = ["pdm-backend"]
