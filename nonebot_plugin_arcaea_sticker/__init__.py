@@ -12,16 +12,15 @@ from nonebot.adapters.onebot.v11 import MessageSegment, MessageEvent
 
 require("nonebot_plugin_htmlrender")
 
-from . import __main__ as __main__
 from .config import Config, plugin_config, RESOURCE_DIR, FONT_DIR
 from .resource import ResourceManager
 from .render import generate_sticker_image, renderer, resource_manager
 from .help import generate_help_image, HELP_TEXT
 
-__version__ = "0.2.5"
-
 # 获取驱动器
 driver = get_driver()
+
+__version__ = "0.2.6"
 
 __plugin_meta__ = PluginMetadata(
     name="Arcaea表情包生成器",
@@ -33,7 +32,8 @@ __plugin_meta__ = PluginMetadata(
     supported_adapters={"~onebot.v11"},
     extra={
         "author": "JQ-28",
-        "version": __version__
+        "version": "0.2.6",
+        "priority": 1,
     },
 )
 
@@ -199,7 +199,7 @@ async def handle_args(matcher: Matcher, event: MessageEvent, args: Namespace = S
                 font_color = args.font_color if args.font_color.startswith('#') else f"#{args.font_color}"
                 params["font_color"] = font_color
                 # 自动生成更深的描边颜色
-                # 将十六进制颜色转换为RGB，每分量减少30%生成更深的颜色
+                # 将十六进制颜色转换为RGB，每个分量减少30%生成更深的颜色
                 r = int(font_color[1:3], 16)
                 g = int(font_color[3:5], 16)
                 b = int(font_color[5:7], 16)
@@ -266,7 +266,7 @@ async def handle_args(matcher: Matcher, event: MessageEvent, args: Namespace = S
                 auto_adjust=True,  # 默认启用自动调整
                 **params
             )
-            logger.debug(f"生成表情图参数: {params}")
+            logger.debug(f"生成表情图片参数: {params}")
         except Exception as e:
             logger.exception("生成表情图片失败")
             await matcher.finish(f"生成表情图片失败: {str(e)}")
