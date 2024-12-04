@@ -18,7 +18,7 @@ _✨ 基于 NoneBot2 的 Arcaea 表情包生成插件 ✨_
   <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/lgc-NB2Dev/readme/main/template/pyd-v1-or-v2.json" alt="Pydantic Version 1 Or 2" >
 </a>
 <a href="./LICENSE">
-  <img src="https://img.shields.io/github/license/Agnes4m/nonebot_plugin_pjsk.svg" alt="license">
+  <img src="https://img.shields.io/github/license/Agnes4m/nonebot_plugin_arcaea_sticker.svg" alt="license">
 </a>
 <a href="https://pypi.python.org/pypi/nonebot-plugin-arcaea-sticker">
   <img src="https://img.shields.io/pypi/v/nonebot-plugin-arcaea-sticker.svg" alt="pypi">
@@ -135,3 +135,5 @@ QQ 群: 806446119 (Bot群，欢迎来玩)
 
 JQ-28
 QQ：480352716
+
+第一次写代码，比较史山，请见谅，使用了CHATGPT
