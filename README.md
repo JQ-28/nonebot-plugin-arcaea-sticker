@@ -9,9 +9,6 @@ _✨ 基于 NoneBot2 的 Arcaea 表情包生成插件 ✨_
   <a href="https://pypi.python.org/pypi/nonebot-plugin-arcaea-sticker">
     <img src="https://img.shields.io/pypi/v/nonebot-plugin-arcaea-sticker.svg" alt="pypi">
   </a>
-  <a href="https://pypi.python.org/pypi/nonebot-plugin-arcaea-sticker">
-    <img src="https://img.shields.io/pypi/dm/nonebot-plugin-arcaea-sticker" alt="pypi download">
-  </a>
 </p>
 
 <p align="center">
@@ -140,4 +137,4 @@ arc tairitsu 开心 -x 150 -y 100 -r -20  # 调整位置和角度
 
 </div>
 
-第一次写代码，比较史，请见谅，有使用chatgpt优化
+第一次写代码，比较史，请见谅，如有问题或建议请直接发issue，我会尽量解决
