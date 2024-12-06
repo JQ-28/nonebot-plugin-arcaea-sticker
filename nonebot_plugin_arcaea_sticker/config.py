@@ -1,7 +1,10 @@
 from pathlib import Path
 from typing import List, Optional
+from nonebot import get_plugin_config, require
 
-from nonebot import get_plugin_config
+require("nonebot_plugin_localstore")
+import nonebot_plugin_localstore as store
+
 from pydantic import BaseModel
 
 # 插件目录
@@ -11,8 +14,8 @@ PLUGIN_DIR = Path(__file__).parent
 RESOURCE_DIR = PLUGIN_DIR / "img"  # 图片在 插件目录/img/ 下
 FONT_DIR = PLUGIN_DIR / "fonts"    # 字体在 插件目录/fonts/ 下
 
-# 缓存目录 - 这个可以放在 data 目录下
-CACHE_DIR = Path.cwd() / "data" / "arcaea" / "cache"
+# 使用 localstore 管理缓存目录
+CACHE_DIR = store.get_cache_dir("arcaea_sticker")
 
 # 角色ID映射表
 CHARACTER_ID_MAP = {
