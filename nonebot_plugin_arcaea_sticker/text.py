@@ -3,6 +3,10 @@ from typing import List
 
 class TextSizeCalculator:
     """计算文字大小"""
+    def __init__(self, max_width: int, max_height: int):
+        """初始化计算器的最大宽高"""
+        self.max_width = max_width
+        self.max_height = max_height
     
     def calc_char_width(self, char: str, size: int) -> float:
         """计算单个字符宽度,中文字符宽度为size,英文为0.6倍"""

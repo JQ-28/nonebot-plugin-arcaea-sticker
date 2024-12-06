@@ -20,7 +20,7 @@ from .help import generate_help_image, HELP_TEXT
 # 获取驱动器
 driver = get_driver()
 
-__version__ = "0.2.9"
+__version__ = "0.3.0"
 
 __plugin_meta__ = PluginMetadata(
     name="Arcaea表情包生成器",
@@ -32,7 +32,7 @@ __plugin_meta__ = PluginMetadata(
     supported_adapters={"~onebot.v11"},
     extra={
         "author": "JQ-28",
-        "version": "0.2.9",
+        "version": __version__,
         "priority": 1,
     },
 )
