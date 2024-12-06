@@ -129,7 +129,7 @@ arc tairitsu 开心 -x 150 -y 100 -r -20  # 调整位置和角度
 
 <table>
   <tr>
-    <td>ღ互联网小猫窝ღ</td>
+    <td>ღ互联网小猫窝ღ(Bot群,欢迎来玩)</td>
     <td>JQ-28</td>
   </tr>
   <tr>
