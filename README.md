@@ -26,14 +26,6 @@ _✨ 基于 NoneBot2 的 Arcaea 表情包生成插件 ✨_
   </a>
 </p>
 
-<p align="center">
-  <a href="https://registry.nonebot.dev/plugin/nonebot-plugin-arcaea-sticker:nonebot_plugin_arcaea_sticker">
-    <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin%2Fnonebot-plugin-arcaea-sticker" alt="NoneBot Registry">
-  </a>
-  <a href="https://registry.nonebot.dev/plugin/nonebot-plugin-arcaea-sticker:nonebot_plugin_arcaea_sticker">
-    <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-arcaea-sticker" alt="Supported Adapters">
-  </a>
-</p>
 
 <p align="center">
   <img src="https://github.com/JQ-28/nonebot-plugin-arcaea-sticker/blob/main/nami%E9%BE%99%E7%AC%94!%E9%BE%99%E7%AC%94!.png" alt="示例图片">
@@ -147,3 +139,5 @@ arc tairitsu 开心 -x 150 -y 100 -r -20  # 调整位置和角度
 </table>
 
 </div>
+
+第一次写代码，比较史，请见谅，有使用chatgpt优化

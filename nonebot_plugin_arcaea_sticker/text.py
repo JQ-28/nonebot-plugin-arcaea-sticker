@@ -2,17 +2,14 @@ import math
 from typing import List
 
 class TextSizeCalculator:
-    """文字大小计算器"""
-    def __init__(self, max_width: int, max_height: int):
-        self.max_width = max_width
-        self.max_height = max_height
+    """计算文字大小"""
     
     def calc_char_width(self, char: str, size: int) -> float:
-        """计算单个字符宽度"""
+        """计算单个字符宽度,中文字符宽度为size,英文为0.6倍"""
         return size if len(char.encode('utf-8')) > 1 else size * 0.6
     
     def calc_line_width(self, line: str, size: int, rotate_deg: float) -> float:
-        """计算单行文本宽度"""
+        """计算单行文本宽度,考虑旋转角度"""
         char_widths = sum(self.calc_char_width(c, size) for c in line)
         rotate_rad = math.radians(rotate_deg)
         return abs(char_widths * math.cos(rotate_rad)) + abs(size * math.sin(rotate_rad))

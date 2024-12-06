@@ -28,14 +28,10 @@ ROUTER_BASE_URL = "https://arcaea.nonebot/"
 TEMPLATES_DIR = PLUGIN_DIR / "templates"
 
 class ImageRenderer:
-    """图片渲染器，负责将表情配置渲染为图片"""
+    """处理表情图片的渲染"""
     
     def __init__(self, templates_dir: Path) -> None:
-        """初始化渲染器
-        
-        Args:
-            templates_dir (Path): 模板目录路径
-        """
+        """初始化渲染器,设置模板目录"""
         self.env = jinja2.Environment(
             loader=jinja2.FileSystemLoader(templates_dir),
             autoescape=jinja2.select_autoescape(["html", "xml"]),
@@ -47,7 +43,7 @@ class ImageRenderer:
         )
     
     def to_router_url(self, path: Union[str, Path]) -> str:
-        """转换本地路径为路由URL"""
+        """把本地路径转成路由URL"""
         if not isinstance(path, Path):
             path = Path(path)
         url = f"{ROUTER_BASE_URL}{path.relative_to(PLUGIN_DIR)}".replace("\\", "/")
