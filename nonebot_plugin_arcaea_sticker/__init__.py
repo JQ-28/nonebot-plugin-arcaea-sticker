@@ -119,19 +119,20 @@ async def handle_help(matcher: Matcher, args: ParserExit = ShellCommandArgs()):
 # 处理命令行参数
 @arc.handle()
 async def handle_args(matcher: Matcher, event: MessageEvent, args: Namespace = ShellCommandArgs()):
+    """处理命令参数,生成表情"""
     if not any(vars(args).values()) or (len(args.text) == 0):
         matcher.skip()
         return
     
     try:
-        # 处理 ID 或名称
+        # 检查ID和名称参数
         sticker_id: Optional[str] = args.id
         sticker_name: Optional[str] = args.name
         
         if sticker_id and sticker_name:
-            await matcher.finish("不能同时使用 -i 和 -n 参数")
+            await matcher.finish("不能同时用-i和-n参数")
         
-        # 获取原始消息文本
+        # 获取消息文本
         raw_message = str(event.message)
         
         # 提取角色标识符
