@@ -46,7 +46,9 @@ class ImageRenderer:
         """把本地路径转成路由URL"""
         if not isinstance(path, Path):
             path = Path(path)
-        url = f"{ROUTER_BASE_URL}{path.relative_to(PLUGIN_DIR)}".replace("\\", "/")
+        
+        # 不再使用 relative_to，直接使用文件名
+        url = f"{ROUTER_BASE_URL}{path.name}".replace("\\", "/")
         return url
     
     async def render_svg(self, info: StickerInfo, text: str, **params) -> str:
@@ -173,11 +175,23 @@ async def file_router(route: Route, request: Request):
     """文件路由处理"""
     try:
         url = URL(request.url)
-        path = PLUGIN_DIR / url.path[1:]
-        if not path.exists():
-            raise FileNotFoundError(f"File not found: {path}")
-        data = await anyio.Path(path).read_bytes()
-        await route.fulfill(body=data)
+        filename = url.path.split('/')[-1]  # 获取文件名
+        
+        # 按顺序在不同目录中查找文件
+        search_paths = [
+            RESOURCE_DIR / filename,  # 先在数据目录中查找
+            FONT_DIR / filename,      # 再在字体目录中查找
+            PLUGIN_DIR / "img" / filename,  # 最后在插件目录中查找
+            PLUGIN_DIR / "fonts" / filename,
+        ]
+        
+        for path in search_paths:
+            if path.exists():
+                data = await anyio.Path(path).read_bytes()
+                await route.fulfill(body=data)
+                return
+                
+        raise FileNotFoundError(f"File not found: {filename}")
     except Exception as e:
         logger.exception(f"File loading error: {e}")
         await route.abort()

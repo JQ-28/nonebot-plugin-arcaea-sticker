@@ -62,8 +62,6 @@ plugins = ["nonebot_plugin_arcaea_sticker"]
 ```env
 # 是否回复消息
 arcaea_reply=true
-# 是否使用缓存
-arcaea_use_cache=true
 ```
 
 ## 🎮 使用方法

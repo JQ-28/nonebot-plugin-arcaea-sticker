@@ -20,7 +20,7 @@ from .help import generate_help_image, HELP_TEXT
 # 获取驱动器
 driver = get_driver()
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 
 __plugin_meta__ = PluginMetadata(
     name="Arcaea表情包生成器",
@@ -365,13 +365,3 @@ async def check_resources():
     if not RESOURCE_DIR.exists():
         logger.warning(f"图片目录不存在，创建目录: {RESOURCE_DIR}")
         RESOURCE_DIR.mkdir(parents=True, exist_ok=True)
-    
-    # 检查必要的文件
-    required_files = [
-        RESOURCE_DIR / "arcaea_stickers.png",
-        FONT_DIR / "YurukaFangTang.ttf"
-    ]
-    
-    for file in required_files:
-        if not file.exists():
-            logger.warning(f"缺少必要文件: {file}")
