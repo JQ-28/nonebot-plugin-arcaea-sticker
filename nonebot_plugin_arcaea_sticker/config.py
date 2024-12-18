@@ -1,21 +1,45 @@
 from pathlib import Path
 from typing import List, Optional
 from nonebot import get_plugin_config, require
+import shutil
 
 require("nonebot_plugin_localstore")
 import nonebot_plugin_localstore as store
 
 from pydantic import BaseModel
 
-# 插件目录
+# 插件目录（开发时的资源位置）
 PLUGIN_DIR = Path(__file__).parent
 
-# 资源目录
-RESOURCE_DIR = PLUGIN_DIR / "img"  # 图片在 插件目录/img/ 下
-FONT_DIR = PLUGIN_DIR / "fonts"    # 字体在 插件目录/fonts/ 下
+# 使用 localstore 管理资源目录
+DATA_DIR = store.get_plugin_data_dir() / "arcaea_sticker"
+RESOURCE_DIR = DATA_DIR / "img"
+FONT_DIR = DATA_DIR / "fonts"
 
-# 使用 localstore 管理缓存目录
-CACHE_DIR = store.get_cache_dir("arcaea_sticker")
+# 初始化资源文件
+def init_plugin_resources():
+    """初始化插件资源文件"""
+    # 创建必要的目录
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    RESOURCE_DIR.mkdir(parents=True, exist_ok=True)
+    FONT_DIR.mkdir(parents=True, exist_ok=True)
+
+    # 复制开发目录下的资源文件到数据目录
+    dev_resource_dir = PLUGIN_DIR / "img"
+    dev_font_dir = PLUGIN_DIR / "fonts"
+
+    if dev_resource_dir.exists():
+        for file in dev_resource_dir.glob("*"):
+            if not (RESOURCE_DIR / file.name).exists():
+                shutil.copy2(file, RESOURCE_DIR)
+
+    if dev_font_dir.exists():
+        for file in dev_font_dir.glob("*"):
+            if not (FONT_DIR / file.name).exists():
+                shutil.copy2(file, FONT_DIR)
+
+# 在模块加载时初始化资源
+init_plugin_resources()
 
 # 角色ID映射表
 CHARACTER_ID_MAP = {
@@ -80,7 +104,7 @@ CHARACTER_COLORS = {
     "lagrange": {"fill": "#bbd7fa", "stroke": "#4c8cdd"}, # 拉格兰：蓝色系
     "luna": {"fill": "#c09edd", "stroke": "#7743a3"},     # 露娜：紫色系
     "maya": {"fill": "#E8B088", "stroke": "#C17F59"},     # 摩耶：橙褐色系
-    "nami": {"fill": "#f9c2cb", "stroke": "#f62f51"},     # 奈美：粉红色系
+    "nami": {"fill": "#f9c2cb", "stroke": "#f62f51"},     # 奈美：粉色系
     "shirahime": {"fill": "#c3d5ff", "stroke": "#657ae7"},# 白姬：淡蓝色系
     "shirabe": {"fill": "#e5616d", "stroke": "#974149"},  # shirabe：红色系
     "tairitsu": {"fill": "#80e8d5", "stroke": "#329f8c"}, # 对立：青色系
@@ -103,7 +127,6 @@ DEFAULT_COLORS = {
 class Config(BaseModel):
     """插件配置"""
     arcaea_reply: bool = True  # 是否回复消息
-    arcaea_use_cache: bool = True  # 是否使用缓存
 
 # 获取配置
 plugin_config = get_plugin_config(Config)
