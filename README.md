@@ -1,6 +1,6 @@
 <div align="center">
 
-# Arcaea 表情包生成器
+# nonebot-plugin-arcaea-sticker
 
 _✨ 基于 NoneBot2 的 Arcaea 表情包生成插件 ✨_
 

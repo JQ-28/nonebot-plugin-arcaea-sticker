@@ -69,10 +69,10 @@ def auto_wrap_text(text: str, max_length: int = 20) -> str:
     
     return '\n'.join(lines)
 
-__version__ = "0.4.1"
+__version__ = "0.4.4"
 
 __plugin_meta__ = PluginMetadata(
-    name="Arcaea表情包生成器",
+    name="nonebot-plugin-arcaea-sticker",
     description="生成Arcaea风格的表情包（跨平台支持）",
     usage=(
         "arc -h 查看文本帮助\n"
