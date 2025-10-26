@@ -24,7 +24,7 @@ _✨ 基于 NoneBot2 的 Arcaea 表情包生成插件 ✨_
 
 
 <p align="center">
-  <img src="https://github.com/JQ-28/nonebot-plugin-arcaea-sticker/blob/main/nami%E9%BE%99%E7%AC%94!%E9%BE%99%E7%AC%94!.png" alt="示例图片">
+  <img src="https://github.com/JQ-28/nonebot-plugin-arcaea-sticker/blob/main/nami%E9%BE%99%E7%AC%94!%E9%BE%99%E7%AC%94!.png?raw=true" alt="示例图片">
 </p>
 
 </div>

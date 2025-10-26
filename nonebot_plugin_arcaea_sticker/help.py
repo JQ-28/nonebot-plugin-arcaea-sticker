@@ -27,7 +27,7 @@ class HelpRenderer:
     
     async def render_to_png(self, svg: str) -> bytes:
         """将SVG渲染为PNG"""
-        async with get_new_page(viewport={'width': 800, 'height': 600, 'deviceScaleFactor': 2}) as page:
+        async with get_new_page(viewport={'width': 800, 'height': 750, 'deviceScaleFactor': 2}) as page:
             await page.set_content(svg)
             element = await page.query_selector("svg")
             if not element:

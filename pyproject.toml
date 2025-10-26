@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-arcaea-sticker"
-version = "0.4.0"
+version = "0.4.1"
 description = "Arcaea sticker generator plugin for NoneBot2 with cross-platform support"
 authors = [
     { name = "JQ-28", email = "480352716@qq.com" }

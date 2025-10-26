@@ -69,7 +69,7 @@ def auto_wrap_text(text: str, max_length: int = 20) -> str:
     
     return '\n'.join(lines)
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 __plugin_meta__ = PluginMetadata(
     name="Arcaea表情包生成器",
