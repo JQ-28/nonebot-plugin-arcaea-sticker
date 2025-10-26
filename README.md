@@ -9,17 +9,16 @@ _✨ 基于 NoneBot2 的 Arcaea 表情包生成插件 ✨_
   <a href="https://pypi.python.org/pypi/nonebot-plugin-arcaea-sticker">
     <img src="https://img.shields.io/pypi/v/nonebot-plugin-arcaea-sticker.svg" alt="pypi">
   </a>
+  <img src="https://img.shields.io/badge/nonebot-2.0.0+-red.svg" alt="NoneBot">
+  <img src="https://img.shields.io/badge/platforms-17+-green.svg" alt="platforms">
 </p>
 
 <p align="center">
   <a href="https://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=sy5x0Bv8IJoMVviC3dRbXTVD9zLdpitx&authKey=OPfY0G2zfQwDQJmf5xV5cqJq7c6%2Beg1cqiCF%2BDHsSFEaGscmeo5ALIdyJ%2BYZmoJb&noverify=0&group_code=806446119">
     <img src="https://img.shields.io/badge/QQ群-806446119-pink" alt="QQ Chat Group">
   </a>
-  <a href="https://pydantic.dev">
-    <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/lgc-NB2Dev/readme/main/template/pyd-v1-or-v2.json" alt="Pydantic Version 1 Or 2" >
-  </a>
   <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/Agnes4m/nonebot_plugin_pjsk.svg" alt="license">
+    <img src="https://img.shields.io/github/license/JQ-28/nonebot-plugin-arcaea-sticker.svg" alt="license">
   </a>
 </p>
 
@@ -32,7 +31,7 @@ _✨ 基于 NoneBot2 的 Arcaea 表情包生成插件 ✨_
 
 ## 📖 介绍
 
-本插件可以生成 Arcaea 风格的表情包，支持自定义文字、位置、角度、颜色等参数。
+本插件可以生成 Arcaea 的表情包，支持自定义文字、位置、角度、颜色等参数。
 
 ## 💿 安装
 
@@ -57,19 +56,27 @@ plugins = ["nonebot_plugin_arcaea_sticker"]
 
 ## ⚙️ 配置
 
-在 NoneBot2 项目的 `.env` 文件中添加以下配置：
+在 NoneBot2 项目的 `.env` 文件中添加以下配置（可选）：
 
 ```env
-# 是否回复消息
+# 是否在回复时 @ 用户（默认 true）
 arcaea_reply=true
 ```
+
+**配置说明**：
+- `arcaea_reply`: 控制是否 @ 发送者
+  - `true`: 回复时会 @ 用户（默认）
+  - `false`: 不 @ 用户
+
+**注意**：所有配置项均为可选，不配置则使用默认值。
 
 ## 🎮 使用方法
 
 ### 基础指令
-- `arc <角色> <文字>` - 生成表情包
-- `arc -h` - 显示帮助
-- `arc` - 进入交互模式
+- `arc <角色> <文字>` - 快速生成表情包
+- `arc` - 进入交互模式（新手友好）
+- `arc -h` - 查看文本帮助（快速参考）
+- `arc帮助` - 查看图片帮助（精美版，推荐首次使用）
 
 ### 自定义参数（都是可选的）
 | 参数 | 说明 | 范围 | 默认值 | 补充说明 |
@@ -97,6 +104,7 @@ arc eto "Ciallo～(∠・ω<)⌒☆" -s 30 -c #fdae92 -r -28 -x 120 -y 80  # 组
 
 - ✅ 支持生成 Arcaea 角色的表情包
 - ✅ 支持命令模式和交互模式
+- ✅ 跨平台支持
 - ✅ 支持自定义文字、位置、角度、颜色等参数
 - ✅ 支持多行文本和自动换行
 - ✅ 智能文字大小调整
@@ -104,12 +112,11 @@ arc eto "Ciallo～(∠・ω<)⌒☆" -s 30 -c #fdae92 -r -28 -x 120 -y 80  # 组
 
 ## 🔧 依赖
 
-- Python
-- NoneBot2 
-- nonebot-adapter-onebot
-- nonebot-plugin-htmlrender 
-- nonebot-plugin-localstore 
-- Playwright
+- Python 3.8+
+- NoneBot2 >= 2.0.0
+- nonebot-plugin-alconna（跨平台支持）
+- nonebot-plugin-htmlrender
+- nonebot-plugin-localstore
 
 ## 📄 开源许可
 
@@ -143,4 +150,9 @@ arc eto "Ciallo～(∠・ω<)⌒☆" -s 30 -c #fdae92 -r -28 -x 120 -y 80  # 组
 
 </div>
 
-第一次写代码，比较史，请见谅，如有问题或建议请直接发issue，我会尽量解决
+## 💬 反馈
+
+如有问题或建议，欢迎：
+- 提交 [Issue](https://github.com/JQ-28/nonebot-plugin-arcaea-sticker/issues)
+- 提交 [Pull Request](https://github.com/JQ-28/nonebot-plugin-arcaea-sticker/pulls)
+- 加入 QQ 群交流：806446119

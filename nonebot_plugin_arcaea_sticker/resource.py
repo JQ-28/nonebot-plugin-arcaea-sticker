@@ -52,7 +52,6 @@ class CharacterManager:
     def find_by_name(self, name: str) -> Optional[StickerInfo]:
         """通过名称查找角色"""
         name = name.lower()
-        # 尝试中文名映射
         if name in self.name_mapping:
             name = self.name_mapping[name]
         return next((x for x in self.characters if x.name.lower() == name), None)
@@ -66,20 +65,16 @@ class CharacterManager:
         if not identifier:
             return None
         
-        # 随机选择
         if identifier in ("random", "随机"):
             return self.get_random()
         
-        # 通过名称查找
         character = self.find_by_name(identifier)
         if character:
             return character
         
-        # 通过ID映射查找
         if identifier in CHARACTER_ID_MAP:
             return self.find_by_id(CHARACTER_ID_MAP[identifier])
         
-        # 通过数字ID查找
         if identifier.isdigit():
             return self.find_by_id(identifier)
         
@@ -90,17 +85,14 @@ class ResourceManager:
     def __init__(self, resource_dir: Path):
         self.resource_dir = resource_dir
         self.character_manager = CharacterManager()
-        # 初始化时加载角色信息
         self._load_characters()
     
     def _load_characters(self):
         """加载角色信息"""
         try:
-            # 确保目录存在
             if not self.resource_dir.exists():
                 raise FileNotFoundError(f"资源目录不存在: {self.resource_dir}")
             
-            # 扫描 img 目录下的所有 png 文件
             sticker_files = sorted(
                 f.name for f in self.resource_dir.glob("*.png") 
                 if f.name != "arcaea_stickers.png"
@@ -109,15 +101,11 @@ class ResourceManager:
             if not sticker_files:
                 raise FileNotFoundError(f"没有找到任何角色图片: {self.resource_dir}")
             
-            # 为每个表情创建配置
             for filename in sticker_files:
-                name = filename.replace(".png", "")  # 文件名(不含扩展名)
-                character = name.lower()  # 转小写用于匹配
-                
-                # 使用CHARACTER_ID_MAP获取固定ID，如果没有则使用默认值
+                name = filename.replace(".png", "")
+                character = name.lower()
                 sticker_id = CHARACTER_ID_MAP.get(character, "0")
                 
-                # 创建并添加角色
                 sticker = StickerInfo.create(
                     sticker_id=sticker_id,
                     name=name,
@@ -162,12 +150,5 @@ class ResourceManager:
             raise
 
     def select_sticker(self, identifier: Optional[str] = None) -> Optional[StickerInfo]:
-        """选择表情（兼容旧接口）"""
+        """选择表情"""
         return self.character_manager.select_character(identifier)
-
-# 删除不需要的函数
-# async def get_character_stickers_grid(character: str) -> bytes:
-#     pass
-
-# async def generate_sticker(info: StickerInfo, text: str) -> bytes:
-#     pass

@@ -3,28 +3,26 @@ from pathlib import Path
 from typing import Optional, Union, Dict
 from contextlib import asynccontextmanager
 
-from nonebot import logger
-from playwright.async_api import Page, Route, Request, Browser, async_playwright
+from nonebot import logger, require
+from playwright.async_api import Page, Route, Request
 import anyio
 import jinja2
 from yarl import URL
+
+require("nonebot_plugin_htmlrender")
+from nonebot_plugin_htmlrender import get_new_page
 
 from .config import FONT_DIR, RESOURCE_DIR, PLUGIN_DIR
 from .models import StickerInfo, StickerText
 from .text import TextSizeCalculator
 from .resource import ResourceManager
 
-# 默认值
 DEFAULT_WIDTH = 296
 DEFAULT_HEIGHT = 256
 DEFAULT_STROKE_WIDTH = 9
 DEFAULT_LINE_SPACING = 1.3
 DEFAULT_STROKE_COLOR = "#ffffff"
-
-# 路由基础 URL
 ROUTER_BASE_URL = "https://arcaea.nonebot/"
-
-# 设置 Jinja2 环境
 TEMPLATES_DIR = PLUGIN_DIR / "templates"
 
 class ImageRenderer:
@@ -114,60 +112,6 @@ class ImageRenderer:
             logger.exception("表情图片渲染失败")
             raise RuntimeError(f"表情图片渲染失败: {e}")
 
-class BrowserManager:
-    """浏览器实例管理器"""
-    def __init__(self):
-        self._browser = None
-        self._lock = anyio.Lock()
-        self._closed = False
-    
-    async def __aenter__(self):
-        if self._closed:
-            raise RuntimeError("Browser manager is closed")
-        
-        async with self._lock:
-            if not self._browser or not self._browser.is_connected():
-                try:
-                    p = await async_playwright().start()
-                    self._browser = await p.chromium.launch(
-                        args=['--disable-gpu', '--no-sandbox']
-                    )
-                except Exception as e:
-                    logger.exception("Failed to launch browser")
-                    raise RuntimeError(f"Failed to launch browser: {e}")
-            return self._browser
-    
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
-        if exc_type:
-            await self.cleanup()
-    
-    async def cleanup(self):
-        """清理浏览器实例"""
-        async with self._lock:
-            if self._browser:
-                try:
-                    await self._browser.close()
-                except Exception as e:
-                    logger.exception("Failed to close browser")
-                finally:
-                    self._browser = None
-                    self._closed = True
-
-    def __del__(self):
-        """确保在对象被销毁时清理资源"""
-        if self._browser:
-            import asyncio
-            try:
-                loop = asyncio.get_event_loop()
-                if loop.is_running():
-                    loop.create_task(self.cleanup())
-                else:
-                    loop.run_until_complete(self.cleanup())
-            except Exception:
-                pass
-
-# 创建全局实例
-browser_manager = BrowserManager()
 renderer = ImageRenderer(TEMPLATES_DIR)
 resource_manager = ResourceManager(RESOURCE_DIR)
 
@@ -175,13 +119,12 @@ async def file_router(route: Route, request: Request):
     """文件路由处理"""
     try:
         url = URL(request.url)
-        filename = url.path.split('/')[-1]  # 获取文件名
+        filename = url.path.split('/')[-1]
         
-        # 按顺序在不同目录中查找文件
         search_paths = [
-            RESOURCE_DIR / filename,  # 先在数据目录中查找
-            FONT_DIR / filename,      # 再在字体目录中查找
-            PLUGIN_DIR / "img" / filename,  # 最后在插件目录中查找
+            RESOURCE_DIR / filename,
+            FONT_DIR / filename,
+            PLUGIN_DIR / "img" / filename,
             PLUGIN_DIR / "fonts" / filename,
         ]
         
@@ -199,18 +142,15 @@ async def file_router(route: Route, request: Request):
 @asynccontextmanager
 async def get_routed_page(initial_html: Optional[str] = None):
     """获取带路由的页面"""
-    async with browser_manager as browser:
-        page = await browser.new_page(
-            viewport={'width': DEFAULT_WIDTH, 'height': DEFAULT_HEIGHT},
-            device_scale_factor=2,
-        )
-        try:
-            await page.route(f"{ROUTER_BASE_URL}**/*", file_router)
-            if initial_html:
-                await page.set_content(initial_html)
-            yield page
-        finally:
-            await page.close()
+    async with get_new_page(
+        viewport={'width': DEFAULT_WIDTH, 'height': DEFAULT_HEIGHT, 'deviceScaleFactor': 2}
+    ) as page:
+        await page.route(f"{ROUTER_BASE_URL}**/*", file_router)
+        
+        if initial_html:
+            await page.set_content(initial_html)
+        
+        yield page
 
 async def generate_sticker_image(
     info: StickerInfo,
